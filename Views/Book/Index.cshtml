@@ -1,0 +1,90 @@
+@model IEnumerable<Book>
+
+@{
+    ViewData["Title"] = "Livros";
+}
+
+<h1>@ViewData["Title"]</h1>
+@if (User.Identity.Name == "admin@admin.com")
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAvailable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReservedAt)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAvailable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReservedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User)
+                </td>
+                <td>
+                    @if (string.IsNullOrEmpty(item.User) && User.Identity.Name !="admin@admin.com" )
+                    {
+                        <a asp-action="Reserve" asp-route-id="@item.Id">Reservar</a>
+
+                    }
+                    @if (User.Identity.Name =="admin@admin.com" )
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+
+                    }
+                    
+                    @if (item.User == User.Identity.Name)
+                    {
+                        <a asp-action="Reserve" asp-route-id="@item.Id">Devolver</a>
+
+                    }
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
+                    @if (User.Identity.Name =="admin@admin.com" )
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+
+                    }
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>

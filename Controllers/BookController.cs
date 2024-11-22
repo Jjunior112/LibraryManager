@@ -142,7 +142,7 @@ namespace LibraryManager
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Reserve(Guid id, [Bind("Id,Title,Author,Year,IsAvailable,ReservedAt,User")] Book book)
+        public async Task<IActionResult> setReserve(Guid id, [Bind("Id,Title,Author,Year,IsAvailable,ReservedAt,User")] Book book)
         {
             if (id != book.Id)
             {
@@ -156,8 +156,10 @@ namespace LibraryManager
                 {
                     
                     book.ReservedAt = DateTime.Now;
-                    book.IsAvailable = false;
-                    book.User = User.Identity.Name;
+                    book.IsAvailable = !book.isAvailable;
+                    
+                    book.User = book.User != null ? "" : User.Identity.Name;
+                      
                     _context.Update(book);
                     await _context.SaveChangesAsync();
 

@@ -32,6 +32,10 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/juare/Desktop/Programação/C\#/LibraryManager/Views/Book/Availables.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xBdmFpbGFibGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/juare/Desktop/Programação/C\#/LibraryManager/Views/Book/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -58,6 +62,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/juare/Desktop/Programação/C\#/LibraryManager/Views/Book/Reserved.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xSZXNlcnZlZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/juare/Desktop/Programação/C\#/LibraryManager/Views/Book/ReturnBook.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xSZXR1cm5Cb29rLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/juare/Desktop/Programação/C\#/LibraryManager/Views/Home/Index.cshtml]

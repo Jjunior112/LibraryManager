@@ -428,3 +428,4 @@ C:\Users\juare\Desktop\Programação\C#\LibraryManager\obj\Debug\net9.0\refint\L
 C:\Users\juare\Desktop\Programação\C#\LibraryManager\obj\Debug\net9.0\LibraryManager.pdb
 C:\Users\juare\Desktop\Programação\C#\LibraryManager\obj\Debug\net9.0\LibraryManager.genruntimeconfig.cache
 C:\Users\juare\Desktop\Programação\C#\LibraryManager\obj\Debug\net9.0\ref\LibraryManager.dll
+C:\Users\juare\Desktop\Programação\C#\LibraryManager\obj\Debug\net9.0\LibraryManager.sourcelink.json

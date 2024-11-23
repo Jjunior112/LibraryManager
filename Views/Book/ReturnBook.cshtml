@@ -5,7 +5,7 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<form asp-action="Reserve" method="post">
+<form asp-action="ReturnBook" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
 
@@ -27,12 +27,12 @@
 
     <div class="form-group">
         <label asp-for="User" class="control-label"></label>
-        <input asp-for="User" class="form-control" readonly value="@User.Identity.Name" />
+        <input asp-for="User" class="form-control" readonly value=" " />
     </div>
 
 
     <div class="form-group">
-        <input type="submit" value="Reservar" class="btn btn-primary" />
+        <input type="submit" value="Devolver" class="btn btn-primary" />
         <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
     </div>
 </form>

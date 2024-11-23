@@ -29,6 +29,10 @@ namespace LibraryManager
         {
             return View(await _context.Books.Where(x => x.User == User.Identity.Name).ToListAsync());
         }
+        public async Task<IActionResult> Availables()
+        {
+            return View(await _context.Books.Where(x=>x.IsAvailable == true).ToListAsync());
+        }
 
         // GET: Book/Details/5
         public async Task<IActionResult> Details(Guid? id)
@@ -63,6 +67,7 @@ namespace LibraryManager
         {
             if (ModelState.IsValid)
             {
+                
                 book.Id = Guid.NewGuid();
 
                 _context.Add(book);
@@ -142,7 +147,7 @@ namespace LibraryManager
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> setReserve(Guid id, [Bind("Id,Title,Author,Year,IsAvailable,ReservedAt,User")] Book book)
+        public async Task<IActionResult> Reserve(Guid id, [Bind("Id,Title,Author,Year")] Book book)
         {
             if (id != book.Id)
             {
@@ -151,18 +156,15 @@ namespace LibraryManager
 
             if (ModelState.IsValid)
             {
+                // Atualizar o usuário com o nome do usuário autenticado
+                book.User = User.Identity.Name;
+                book.IsAvailable = false;
+                book.ReservedAt = DateTime.Now;
 
                 try
                 {
-                    
-                    book.ReservedAt = DateTime.Now;
-                    book.IsAvailable = !book.isAvailable;
-                    
-                    book.User = book.User != null ? "" : User.Identity.Name;
-                      
                     _context.Update(book);
                     await _context.SaveChangesAsync();
-
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -174,13 +176,74 @@ namespace LibraryManager
                     {
                         throw;
                     }
-
                 }
-                return RedirectToAction(nameof(Index));
 
+                return RedirectToAction(nameof(Index));
+            }
+
+
+            return View(book);
+        }
+
+         // GET: Book/Reserve/5
+
+        public async Task<IActionResult> ReturnBook(Guid? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var book = await _context.Books.FindAsync(id);
+            if (book == null)
+            {
+                return NotFound();
             }
             return View(book);
         }
+
+        // POST: Book/Reserve/5
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ReturnBook(Guid id, [Bind("Id,Title,Author,Year")] Book book)
+        {
+            if (id != book.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                // Atualizar o usuário com o nome do usuário autenticado
+                book.User = "";
+                book.IsAvailable = true;
+                
+
+                try
+                {
+                    _context.Update(book);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!BookExists(book.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+
+
+            return View(book);
+        }
+
         // GET: Book/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {

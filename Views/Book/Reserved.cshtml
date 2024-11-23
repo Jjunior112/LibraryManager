@@ -3,7 +3,12 @@
 @{
     ViewData["Title"] = "Reservas";
 }
-
+@if (User.Identity.Name != "admin@admin.com")
+{
+    <p>
+        <a asp-action="Availables">Nova reserva</a>
+    </p>
+}
 <h1>Minhas Reservas</h1>
 
 
@@ -19,7 +24,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Year)
             </th>
-           
+
             <th>
                 @Html.DisplayNameFor(model => model.ReservedAt)
             </th>
@@ -30,30 +35,36 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Year)
-            </td>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.ReservedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User)
-            </td>
-            <td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
 
-                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> 
-                
-            </td>
-        </tr>
-}
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReservedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User)
+                </td>
+                <td>
+                    @if (item.User == User.Identity.Name)
+                    {
+                        <a asp-action="ReturnBook" asp-route-id="@item.Id">Devolver</a>
+
+                    }
+
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
+
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

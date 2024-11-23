@@ -1,8 +1,59 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Library Manager";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+<header class="bg-primary text-white text-center py-5">
+    <h1>@ViewData["Title"]</h1>
+</header>
+<main class="container my-5">
+    <section class="mb-5">
+        <h2 class="text-secondary">1. Bem-vindo à Nossa Biblioteca</h2>
+        <p class="lead">
+            Estamos dedicados a promover a leitura, o conhecimento e a cultura. Nossa biblioteca oferece uma vasta coleção de livros, revistas e materiais digitais para todos os públicos.
+        </p>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="text-secondary">2. Nossa Coleção</h2>
+        <p>Explore nossa coleção diversificada que inclui:</p>
+        <ul class="list-group">
+            <li class="list-group-item"><strong>Livros:</strong> Clássicos, lançamentos, ficção, não-ficção e muito mais.</li>
+            <li class="list-group-item"><strong>Revistas e Jornais:</strong> Publicações locais e internacionais.</li>
+            <li class="list-group-item"><strong>Materiais Digitais:</strong> E-books e audiolivros acessíveis diretamente pelo nosso site.</li>
+        </ul>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="text-secondary">3. Como Funciona</h2>
+        <p>Facilitamos o acesso ao conhecimento através de:</p>
+        <ul class="list-group">
+            <li class="list-group-item">Cadastro simples para membros.</li>
+            <li class="list-group-item">Reserva online de livros disponíveis.</li>
+            <li class="list-group-item">Acesso a materiais digitais de qualquer lugar.</li>
+        </ul>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="text-secondary">4. Eventos e Atividades</h2>
+        <p>Participe de eventos e atividades organizados por nossa biblioteca, incluindo:</p>
+        <ul class="list-group">
+            <li class="list-group-item">Clubes do livro e discussões literárias.</li>
+            <li class="list-group-item">Oficinas culturais e educativas.</li>
+            <li class="list-group-item">Palestras e sessões de autógrafos com autores convidados.</li>
+        </ul>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="text-secondary">5. Contato</h2>
+        <p>Tem dúvidas ou sugestões? Entre em contato conosco:</p>
+        <ul class="list-unstyled">
+            <li><strong>Telefone:</strong> (XX) XXXX-XXXX</li>
+            <li><strong>E-mail:</strong> <a href="mailto:biblioteca@dominio.com">biblioteca@dominio.com</a></li>
+            <li><strong>Endereço:</strong> Rua da Cultura, 123, Centro, Cidade/Estado</li>
+        </ul>
+    </section>
+</main>
+<footer class="bg-dark text-white text-center py-3">
+    <p>&copy; 2024 Biblioteca Virtual. Todos os direitos reservados.</p>
+</footer>

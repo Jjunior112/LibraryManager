@@ -31,7 +31,7 @@ namespace LibraryManager
         }
         public async Task<IActionResult> Availables()
         {
-            return View(await _context.Books.Where(x=>x.IsAvailable == true).ToListAsync());
+            return View(await _context.Books.Where(x => x.IsAvailable == true).ToListAsync());
         }
 
         // GET: Book/Details/5
@@ -61,13 +61,14 @@ namespace LibraryManager
         // POST: Book/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Author,Year,IsAvailable,ReservedAt,User")] Book book)
         {
             if (ModelState.IsValid)
             {
-                
+
                 book.Id = Guid.NewGuid();
 
                 _context.Add(book);
@@ -76,7 +77,7 @@ namespace LibraryManager
             }
             return View(book);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Book/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
@@ -94,7 +95,7 @@ namespace LibraryManager
         }
 
         // POST: Book/Edit/5
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("Id,Title,Author,Year,IsAvailable,ReservedAt,User")] Book book)
@@ -127,7 +128,7 @@ namespace LibraryManager
             return View(book);
         }
         // GET: Book/Reserve/5
-
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Reserve(Guid? id)
         {
             if (id == null)
@@ -144,7 +145,7 @@ namespace LibraryManager
         }
 
         // POST: Book/Reserve/5
-
+        [Authorize(Roles = "User")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Reserve(Guid id, [Bind("Id,Title,Author,Year")] Book book)
@@ -153,6 +154,7 @@ namespace LibraryManager
             {
                 return NotFound();
             }
+
 
             if (ModelState.IsValid)
             {
@@ -185,8 +187,8 @@ namespace LibraryManager
             return View(book);
         }
 
-         // GET: Book/Reserve/5
-
+        // GET: Book/Reserve/5
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> ReturnBook(Guid? id)
         {
             if (id == null)
@@ -203,7 +205,7 @@ namespace LibraryManager
         }
 
         // POST: Book/Reserve/5
-
+        [Authorize(Roles = "User")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ReturnBook(Guid id, [Bind("Id,Title,Author,Year")] Book book)
@@ -215,10 +217,10 @@ namespace LibraryManager
 
             if (ModelState.IsValid)
             {
-                // Atualizar o usuário com o nome do usuário autenticado
+
                 book.User = "";
                 book.IsAvailable = true;
-                
+
 
                 try
                 {
@@ -243,7 +245,7 @@ namespace LibraryManager
 
             return View(book);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Book/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {

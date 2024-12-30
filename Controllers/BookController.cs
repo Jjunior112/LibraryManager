@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LibraryManager.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 
 namespace LibraryManager
 {
@@ -128,7 +129,7 @@ namespace LibraryManager
             return View(book);
         }
         // GET: Book/Reserve/5
-        [Authorize(Roles = "User")]
+        
         public async Task<IActionResult> Reserve(Guid? id)
         {
             if (id == null)
@@ -145,7 +146,7 @@ namespace LibraryManager
         }
 
         // POST: Book/Reserve/5
-        [Authorize(Roles = "User")]
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Reserve(Guid id, [Bind("Id,Title,Author,Year")] Book book)
@@ -154,12 +155,15 @@ namespace LibraryManager
             {
                 return NotFound();
             }
+            // if(User.Identity.Name==null){
 
+            //     return RedirectToAction("");
+            // }
 
-            if (ModelState.IsValid)
+            if (User.Identity.IsAuthenticated)
             {
                 // Atualizar o usuário com o nome do usuário autenticado
-                book.User = User.Identity.Name;
+                 book.User = User.Identity.Name;
                 book.IsAvailable = false;
                 book.ReservedAt = DateTime.Now;
 
@@ -182,13 +186,17 @@ namespace LibraryManager
 
                 return RedirectToAction(nameof(Index));
             }
+            else{
+                return Redirect("/Identity/Account/Login");
+
+            }
 
 
             return View(book);
         }
 
         // GET: Book/Reserve/5
-        [Authorize(Roles = "User")]
+        
         public async Task<IActionResult> ReturnBook(Guid? id)
         {
             if (id == null)
@@ -205,7 +213,7 @@ namespace LibraryManager
         }
 
         // POST: Book/Reserve/5
-        [Authorize(Roles = "User")]
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ReturnBook(Guid id, [Bind("Id,Title,Author,Year")] Book book)

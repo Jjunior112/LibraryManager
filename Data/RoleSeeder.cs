@@ -45,6 +45,7 @@
 
 
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
@@ -72,6 +73,7 @@ namespace LibraryManager.Data
             // Criar um administrador padrão
             var adminUser = new IdentityUser
             {
+                
                 UserName = "admin@admin.com",
                 Email = "admin@admin.com",
                 EmailConfirmed = true
@@ -89,19 +91,20 @@ namespace LibraryManager.Data
 
 
 
-            // Criar um usuário padrão
-            var users = userManager.Users.ToList();
+            // // Criar um usuário padrão
 
-            foreach (var user in users)
-            {
-                // Adiciona o usuário à role "User" se ainda não estiver nela
-                if (!await userManager.IsInRoleAsync(user, "User"))
-                {
-                    await userManager.AddToRoleAsync(user, "User");
-                }
+            // var users = await userManager.Users.ToListAsync();
+
+            // foreach (var user in users)
+            // {
+                
+            //     if (!await userManager.IsInRoleAsync(user, "User"))
+            //     {
+            //         await userManager.AddToRoleAsync(user, "User");
+            //     }
 
 
-            }
+            // }
         }
     }
 }

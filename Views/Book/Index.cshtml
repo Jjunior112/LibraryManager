@@ -60,11 +60,13 @@
                     @Html.DisplayFor(modelItem => item.User)
                 </td>
                 <td>
-                    @if (string.IsNullOrEmpty(item.User) && User.Identity.Name !="admin@admin.com" )
+                    @if ( string.IsNullOrEmpty(item.User) && User.Identity.Name !="admin@admin.com" )
                     {
                         <a asp-action="Reserve" asp-route-id="@item.Id">Reservar</a>
 
                     }
+                     
+                   
                     @if (User.Identity.Name =="admin@admin.com" )
                     {
                         <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
@@ -82,9 +84,10 @@
                         <a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
 
                     }
+                   
                 </td>
             </tr>
-
+             
         }
     </tbody>
 </table>
